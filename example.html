@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Times Brasileiros - API Demo</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+  <div class="container py-4">
+    <h1 class="mb-4 text-center">Times Brasileiros - API Demo</h1>
+    <input id="search" class="form-control mb-3" placeholder="Buscar por nome, cidade ou estado...">
+
+    <div id="clubs" class="row g-3"></div>
+  </div>
+
+  <script>
+    const API_URL = "http://localhost:3000/clubs";
+
+    async function fetchClubs(query = "") {
+      const res = await fetch(API_URL + (query ? `?q=${query}` : ""));
+      const data = await res.json();
+      renderClubs(data.data);
+    }
+
+    function renderClubs(clubs) {
+      const container = document.getElementById("clubs");
+      container.innerHTML = "";
+      clubs.forEach(c => {
+        const card = document.createElement("div");
+        card.className = "col-md-4";
+        card.innerHTML = `
+          <div class="card shadow-sm h-100">
+            <div class="card-body">
+              <h5 class="card-title">${c.short_name}</h5>
+              <p class="card-text">
+                <strong>${c.full_name}</strong><br>
+                Cidade: ${c.city} - ${c.state}<br>
+                Fundação: ${c.founded || "N/A"}<br>
+                Status: <span class="badge bg-${c.status === "active" ? "success" : "secondary"}">${c.status}</span>
+              </p>
+              <a href="https://pt.wikipedia.org/wiki/${encodeURIComponent(c.wikipedia_page)}" target="_blank" class="btn btn-primary btn-sm">Wikipedia</a>
+            </div>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    document.getElementById("search").addEventListener("input", e => {
+      fetchClubs(e.target.value);
+    });
+
+    fetchClubs();
+  </script>
+</body>
+</html>
