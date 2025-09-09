@@ -13,8 +13,7 @@ API REST em **Node.js + Express** para listar **clubes brasileiros de futebol** 
 ```
 
 ├── clubs.json      # Base inicial com times brasileiros
-├── server.js       # Servidor Express (API REST)
-└── README.md       # Este arquivo
+└── server.js       # Servidor Express (API REST)
 
 ````
 
