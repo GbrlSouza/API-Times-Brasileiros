@@ -21,15 +21,15 @@ API REST em **Node.js + Express** para listar **clubes brasileiros de futebol** 
 
 1. Clone este repositório:
    ```bash
-   git clone https://github.com/GbrlSouza/api-times-br.git
-   cd api-times-br
+   git clone https://github.com/GbrlSouza/API-Times-Brasileiros.git
+   cd API-Times-Brasileiros
     ```
 
 2. Crie o `package.json` (ou copie este exemplo):
 
    ```json
    {
-     "name": "api-times-br",
+     "name": "API-Times-Brasileiros",
      "version": "1.0.0",
      "type": "module",
      "main": "server.js",
