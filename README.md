@@ -1,4 +1,4 @@
-# ⚽ API Times Brasileiros
+![Logo do projeto](https://github.com/GbrlSouza/API-Times-Brasileiros/blob/main/banner.png)
 
 API REST em **Node.js + Express** para listar **clubes brasileiros de futebol** (ativos e inativos), de A a Z, com dados históricos e integração com a Wikipedia.
 
