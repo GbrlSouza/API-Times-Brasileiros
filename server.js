@@ -9,7 +9,7 @@
  * ⚠️ Nota: "todos os times do Brasil" é um universo muito grande (milhares,
  * incluindo profissionais e amadores ao longo da história). Este servidor vem
  * com uma base inicial robusta (diversos clubes por letra A–Z) e estrutura para
- * escalar. Basta continuar adicionando itens no array `CLUBS` abaixo.
+ * escalar. Basta continuar adicionando itens no arquivo JSON "clubs.json".
  *
  * Como rodar:
  * 1) Salve este arquivo como `server.js`.
@@ -232,4 +232,5 @@ app.get('/openapi.json', (req, res) => {
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`API Times BR rodando em http://localhost:${PORT}`);
+
 });
