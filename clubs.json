@@ -191,9 +191,8 @@
   { "short_name": "XV de Jaú", "full_name": "Esporte Clube XV de Novembro (Jaú)", "city": "Jaú", "state": "SP", "founded": 1924, "status": "active", "wikipedia_page": "Esporte Clube XV de Novembro (Jaú)", "anthem": { "title": "Hino do XV de Jaú", "lyrics_url": "https://pt.wikipedia.org/wiki/Esporte_Clube_XV_de_Novembro_(Ja%C3%BA)", "audio_url": null } },
 
   { "short_name": "Ypiranga-AP", "full_name": "Ypiranga Clube (AP)", "city": "Macapá", "state": "AP", "founded": 1963, "status": "active", "wikipedia_page": "Ypiranga Clube", "anthem": { "title": "Hino do Ypiranga-AP", "lyrics_url": "https://pt.wikipedia.org/wiki/Ypiranga_Clube", "audio_url": null } },
-  { "short_name": "Ypiranga-RS", "full_name": "Ypiranga Futebol Clube", "city": "Erechim", "state": "RS", "founded": 1924, "status": "active", "wikipedia_page": "Ypiranga Futebol Clube", "anthem": null },
   { "short_name": "Ypiranga-PE", "full_name": "Ypiranga Futebol Clube (Recife)", "city": "Recife", "state": "PE", "founded": 1906, "status": "inactive", "wikipedia_page": "Ypiranga Futebol Clube (Recife)", "anthem": null },
-  { "short_name": "Ypiranga-RS", "full_name": "Ypiranga Futebol Clube (RS)", "city": "Erechim", "state": "RS", "founded": 1924, "status": "active", "wikipedia_page": "Ypiranga Futebol Clube", "anthem": { "title": "Hino do Ypiranga-RS", "lyrics_url": "https://pt.wikipedia.org/wiki/Ypiranga_Futebol_Clube", "audio_url": null } },
+  { "short_name": "Ypiranga-RS", "full_name": "Ypiranga Futebol Clube", "city": "Erechim", "state": "RS", "founded": 1924, "status": "active", "wikipedia_page": "Ypiranga Futebol Clube", "anthem": { "title": "Hino do Ypiranga-RS", "lyrics_url": "https://pt.wikipedia.org/wiki/Ypiranga_Futebol_Clube", "audio_url": null } },
 
   { "short_name": "Zumbi", "full_name": "Zumbi Esporte Clube", "city": "União dos Palmares", "state": "AL", "founded": 1954, "status": "active", "wikipedia_page": "Zumbi Esporte Clube", "anthem": { "title": "Hino do Zumbi", "lyrics_url": "https://pt.wikipedia.org/wiki/Zumbi_Esporte_Clube", "audio_url": null } }
 ]
