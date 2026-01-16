@@ -1,0 +1,21 @@
+body {
+  background-color: #f5f7fa;
+}
+
+.card-club {
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card-club:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+.badge-active {
+  background-color: #198754;
+}
+
+.badge-inactive {
+  background-color: #dc3545;
+}
