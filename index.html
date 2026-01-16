@@ -5,51 +5,21 @@
   <title>Clubes de Futebol Brasileiros</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- Bootstrap 5 CSS -->
+  <!-- Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
-  <style>
-    /* ===============================
-       ESTILOS GERAIS
-    =============================== */
-    body {
-      background-color: #f5f7fa;
-    }
-
-    .card-club {
-      cursor: pointer;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .card-club:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-    }
-
-    .badge-active {
-      background-color: #198754;
-    }
-
-    .badge-inactive {
-      background-color: #dc3545;
-    }
-  </style>
+  <!-- CSS personalizado -->
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 
 <body>
 
-<!-- ===============================
-     HEADER
-================================ -->
 <nav class="navbar navbar-dark bg-dark mb-4">
   <div class="container">
-    <span class="navbar-brand mb-0 h1">⚽ Clubes de Futebol Brasileiros</span>
+    <span class="navbar-brand h1">⚽ Clubes de Futebol Brasileiros</span>
   </div>
 </nav>
 
-<!-- ===============================
-     CONTROLES (BUSCA + ORDENAÇÃO)
-================================ -->
 <div class="container mb-4">
   <div class="row g-3 align-items-center">
     <div class="col-md-6">
@@ -57,24 +27,19 @@
     </div>
     <div class="col-md-6 text-md-end">
       <div class="btn-group">
-        <button class="btn btn-outline-primary" onclick="sortClubs('name')">Ordenar por Nome</button>
-        <button class="btn btn-outline-primary" onclick="sortClubs('founded')">Ordenar por Fundação</button>
-        <button class="btn btn-outline-primary" onclick="sortClubs('state')">Ordenar por Estado</button>
+        <button class="btn btn-outline-primary" data-sort="short_name">Nome</button>
+        <button class="btn btn-outline-primary" data-sort="founded">Fundação</button>
+        <button class="btn btn-outline-primary" data-sort="state">Estado</button>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ===============================
-     LISTA DE CLUBES
-================================ -->
 <div class="container">
   <div id="clubsContainer" class="row g-4"></div>
 </div>
 
-<!-- ===============================
-     MODAL DE DETALHES
-================================ -->
+<!-- Modal -->
 <div class="modal fade" id="clubModal" tabindex="-1">
   <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
@@ -82,9 +47,7 @@
         <h5 class="modal-title" id="modalTitle"></h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
-
       <div class="modal-body" id="modalBody"></div>
-
       <div class="modal-footer">
         <button class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
       </div>
@@ -92,108 +55,11 @@
   </div>
 </div>
 
-<!-- ===============================
-     SCRIPTS
-================================ -->
+<!-- Bootstrap -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-<script>
-/* ===============================
-   DADOS
-================================ */
-let clubs = [];
-let filteredClubs = [];
-
-/* ===============================
-   CARREGA JSON EXTERNO
-================================ */
-fetch("clubs.json")
-  .then(response => response.json())
-  .then(data => {
-    clubs = data;
-    filteredClubs = [...clubs];
-    renderClubs(filteredClubs);
-  })
-  .catch(error => {
-    console.error("Erro ao carregar clubs.json:", error);
-  });
-
-/* ===============================
-   RENDERIZA OS CARDS
-================================ */
-function renderClubs(list) {
-  const container = document.getElementById("clubsContainer");
-  container.innerHTML = "";
-
-  list.forEach((club, index) => {
-    const badgeClass = club.status === "active" ? "badge-active" : "badge-inactive";
-
-    container.innerHTML += `
-      <div class="col-sm-6 col-md-4 col-lg-3">
-        <div class="card card-club h-100" onclick="openModal(${index})">
-          <div class="card-body">
-            <h5 class="card-title">${club.short_name}</h5>
-            <p class="card-text mb-1"><strong>Cidade:</strong> ${club.city} - ${club.state}</p>
-            <p class="card-text mb-1"><strong>Fundação:</strong> ${club.founded ?? "Não informado"}</p>
-            <span class="badge ${badgeClass}">${club.status}</span>
-          </div>
-        </div>
-      </div>
-    `;
-  });
-}
-
-/* ===============================
-   MODAL DE DETALHES
-================================ */
-function openModal(index) {
-  const club = filteredClubs[index];
-  document.getElementById("modalTitle").innerText = club.full_name;
-
-  let anthemHTML = "<p><strong>Hino:</strong> Não disponível</p>";
-
-  if (club.anthem) {
-    anthemHTML = `
-      <p><strong>Hino:</strong> ${club.anthem.title}</p>
-      <p><a href="${club.anthem.lyrics_url}" target="_blank">📄 Ver letra</a></p>
-      ${club.anthem.audio_url ? `<audio controls src="${club.anthem.audio_url}"></audio>` : ""}
-    `;
-  }
-
-  document.getElementById("modalBody").innerHTML = `
-    <p><strong>Cidade:</strong> ${club.city} - ${club.state}</p>
-    <p><strong>Ano de Fundação:</strong> ${club.founded ?? "Não informado"}</p>
-    <p><strong>Status:</strong> ${club.status}</p>
-    <p><a href="https://pt.wikipedia.org/wiki/${club.wikipedia_page}" target="_blank">🌐 Página na Wikipedia</a></p>
-    <hr>
-    ${anthemHTML}
-  `;
-
-  new bootstrap.Modal(document.getElementById("clubModal")).show();
-}
-
-/* ===============================
-   BUSCA
-================================ */
-document.getElementById("searchInput").addEventListener("input", (e) => {
-  const value = e.target.value.toLowerCase();
-  filteredClubs = clubs.filter(c =>
-    c.short_name.toLowerCase().includes(value)
-  );
-});
-
-/* ===============================
-   ORDENAÇÃO
-================================ */
-function sortClubs(type) {
-  filteredClubs.sort((a, b) => {
-    if (type === "founded") {
-      return (a.founded ?? 9999) - (b.founded ?? 9999);
-    }
-    return a[type]?.toString().localeCompare(b[type]?.toString());
-  });
-}
-</script>
+<!-- JS personalizado -->
+<script src="js/script.js"></script>
 
 </body>
 </html>
