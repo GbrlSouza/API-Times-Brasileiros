@@ -40,6 +40,25 @@
   <div id="clubsContainer" class="row g-4"></div>
 </div>
 
+<div id="mapContainer" class="mb-4 d-none">
+  <div class="row">
+    <div class="col-md-7 text-center">
+      <!-- MAPA SVG -->
+      <object
+        id="brazilMap"
+        type="image/svg+xml"
+        data="./assets/svg/brazil-states.svg"
+        style="max-width: 100%; height: 420px;">
+      </object>
+    </div>
+
+    <div class="col-md-5">
+      <h5 id="stateTitle">Selecione um estado</h5>
+      <ul id="stateClubList" class="list-group"></ul>
+    </div>
+  </div>
+</div>
+
 <div class="modal fade" id="clubModal" tabindex="-1">
   <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
