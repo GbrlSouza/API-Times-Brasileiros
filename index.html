@@ -99,10 +99,11 @@
 
 <script>
 /* ===============================
-   JSON DOS CLUBES
+   DADOS
 ================================ */
 let clubs = [];
 let filteredClubs = [];
+
 /* ===============================
    CARREGA JSON EXTERNO
 ================================ */
@@ -117,7 +118,6 @@ fetch("clubs.json")
     console.error("Erro ao carregar clubs.json:", error);
   });
 
-let filteredClubs = [...clubs];
 /* ===============================
    RENDERIZA OS CARDS
 ================================ */
@@ -142,6 +142,7 @@ function renderClubs(list) {
     `;
   });
 }
+
 /* ===============================
    MODAL DE DETALHES
 ================================ */
@@ -170,14 +171,17 @@ function openModal(index) {
 
   new bootstrap.Modal(document.getElementById("clubModal")).show();
 }
+
 /* ===============================
    BUSCA
 ================================ */
 document.getElementById("searchInput").addEventListener("input", (e) => {
   const value = e.target.value.toLowerCase();
-  filteredClubs = clubs.filter(c => c.short_name.toLowerCase().includes(value));
-  renderClubs(filteredClubs);
+  filteredClubs = clubs.filter(c =>
+    c.short_name.toLowerCase().includes(value)
+  );
 });
+
 /* ===============================
    ORDENAÇÃO
 ================================ */
@@ -188,12 +192,7 @@ function sortClubs(type) {
     }
     return a[type]?.toString().localeCompare(b[type]?.toString());
   });
-  renderClubs(filteredClubs);
 }
-/* ===============================
-   INICIALIZAÇÃO
-================================ */
-renderClubs(filteredClubs);
 </script>
 
 </body>
