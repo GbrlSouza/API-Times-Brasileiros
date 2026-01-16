@@ -6,8 +6,9 @@
   
   <title>Clubes de Futebol Brasileiros</title>
 
+  <link rel="shortcut icon" href="./assets/imgs/site/favicon.png" type="image/x-icon">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="./assets/css/styles.css">
 </head>
 
 <body>
@@ -20,7 +21,7 @@
 <div class="container mb-4">
   <div class="row g-3 align-items-center">
     <div class="col-md-4">
-      <img src="./banner.png" style="height: auto; width: 300px; border-radius: 10px; margin: 10px 0;">
+      <img id="logo" src="./assets/imgs/site/banner.png" style="height: auto; width: 300px; border-radius: 10px; margin: 10px 0;">
     </div>
     <div class="col-md-4 align-items-center">
       <input type="text" id="searchInput" class="form-control" placeholder="🔍 Buscar clube pelo nome">
@@ -63,7 +64,8 @@
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<script src="js/script.js"></script>
+<script>window.DATA_URL = "./assets/src/data/clubs.json";</script>
+<script src="./assets/js/script.js"></script>
 
 </body>
 </html>

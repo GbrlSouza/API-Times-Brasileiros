@@ -76,7 +76,7 @@ const getCache = (key) => {
 
 // Dataset inicial (A–Z). Adicione mais clubes livremente.
 // Para escudos/história, informe o título exato da página na Wikipedia em pt.
-const clubsData = require('./clubs.json'),
+const clubsData = require('../../../clubs.json'),
     CLUBS = clubsData,
     CLUBS_NORM = CLUBS.map((c, idx) => ({
         id: idx + 1,

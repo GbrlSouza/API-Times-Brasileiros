@@ -1,27 +1,45 @@
+const dataUrl = window.DATA_URL || "./assets/src/data/clubs.json";
+
 let clubs = [];
 let filteredClubs = [];
 
-fetch("clubs.json")
-  .then(res => res.json())
+if (!dataUrl) {
+  console.error("DATA_URL não definida. Verifique o index.html");
+} else {
+  fetch(dataUrl)
+  .then(res => {
+    if (!res.ok) {
+      throw new Error("Arquivo JSON não encontrado");
+    }
+    
+    return res.json();
+  })
   .then(data => {
     clubs = data;
     filteredClubs = [...clubs];
-    renderClubs(filteredClubs);
-  })
-  .catch(err => console.error("Erro ao carregar JSON:", err));
+    renderClubs(filteredClubs); })
+    .catch(err => console.error("Erro ao carregar JSON:", err));
+}
 
 function renderClubs(list) {
   const container = document.getElementById("clubsContainer");
+  if (!container) return;
+
   container.innerHTML = "";
 
   list.forEach((club, index) => {
     const badgeClass = club.status === "active" ? "badge-active" : "badge-inactive";
+    const logo = club.logo || "assets/img/placeholder.png";
 
     container.innerHTML += `
       <div class="col-sm-6 col-md-4 col-lg-3">
         <div class="card card-club h-100" data-index="${index}">
-          <div class="card-body">
-            <img src="${club.logo}" alt="Escudo" class="img-fluid mb-2" style="max-height: 80px;">
+          <div class="card-body text-center">
+            <img src="${logo}" alt="Escudo do ${club.short_name}"
+                 class="img-fluid mb-2"
+                 style="max-height: 80px;"
+                 onerror="this.src='./assets/imgs/escudos/${club.slug}'">
+
             <h5 class="card-title">${club.short_name}</h5>
             <p class="mb-1"><strong>Cidade:</strong> ${club.city} - ${club.state}</p>
             <p class="mb-1"><strong>Fundação:</strong> ${club.founded ?? "Não informado"}</p>
@@ -41,6 +59,8 @@ function renderClubs(list) {
 
 function openModal(index) {
   const club = filteredClubs[index];
+  if (!club) return;
+
   document.getElementById("modalTitle").innerText = club.full_name;
 
   const anthem = club.anthem
@@ -55,7 +75,31 @@ function openModal(index) {
     <p><strong>Cidade:</strong> ${club.city} - ${club.state}</p>
     <p><strong>Fundação:</strong> ${club.founded ?? "Não informado"}</p>
     <p><strong>Status:</strong> ${club.status}</p>
-    <p><a href="https://pt.wikipedia.org/wiki/${club.wikipedia_page}" target="_blank">🌐 Wikipedia</a></p>
+
+    <p>
+      <a href="https://pt.wikipedia.org/wiki/${club.wikipedia_page}" target="_blank">
+        🌐 Wikipedia
+      </a>
+    </p>
+
+    ${club.site ? `
+      <p>
+        <a href="https://${club.site}" target="_blank">
+          🌐 Site oficial
+        </a>
+      </p>
+    ` : ""}
+    ${club.uniforme ? `
+      <div class="d-flex gap-3 flex-wrap mb-3">
+          <div class="text-center">
+            <iframe
+              style="height: 190px;"
+              src="./assets/imgs/uniformes/${club.uniforme}.html"
+              title="Uniforme do ${club.short_name}">
+            </iframe>
+          </div>
+      </div>
+    ` : ""}
     <hr>
     ${anthem}
   `;
@@ -63,7 +107,8 @@ function openModal(index) {
   new bootstrap.Modal(document.getElementById("clubModal")).show();
 }
 
-document.getElementById("searchInput").addEventListener("input", e => {
+
+document.getElementById("searchInput")?.addEventListener("input", e => {
   const value = e.target.value.toLowerCase();
   filteredClubs = clubs.filter(c =>
     c.short_name.toLowerCase().includes(value)
