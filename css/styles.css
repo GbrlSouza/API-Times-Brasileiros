@@ -19,3 +19,7 @@ body {
 .badge-inactive {
   background-color: #dc3545;
 }
+
+footer {
+  font-size: 0.9rem;
+}
