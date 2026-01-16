@@ -21,6 +21,7 @@ function renderClubs(list) {
       <div class="col-sm-6 col-md-4 col-lg-3">
         <div class="card card-club h-100" data-index="${index}">
           <div class="card-body">
+            <img src="${club.logo}" alt="Escudo" class="img-fluid mb-2" style="max-height: 80px;">
             <h5 class="card-title">${club.short_name}</h5>
             <p class="mb-1"><strong>Cidade:</strong> ${club.city} - ${club.state}</p>
             <p class="mb-1"><strong>Fundação:</strong> ${club.founded ?? "Não informado"}</p>
