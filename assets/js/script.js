@@ -104,16 +104,16 @@ function renderClubs(list, mode = "grid") {
     container.className = "row g-3";
 
     list.forEach((club) => {
-      const logo = club.logo || "assets/img/placeholder.png";
+      const logo = club.slug ? club.slug : "placeholder.png";
       const badgeClass =
         club.status === "active" ? "badge-active" : "badge-inactive";
 
       container.innerHTML += `
         <div class="col-sm-6 col-md-4 col-lg-3">
-          <div class="card card-club h-100" data-slug="${club.slug}">
+          <div class="card card-club h-100" data-slug="${logo}">
             <div class="card-body text-center">
-              <img src="${logo}" style="max-height:80px"
-                   onerror="this.src='./assets/imgs/escudos/${club.slug}'">
+              <img src="./assets/imgs/escudos/${logo}" style="max-height:80px"
+                   onerror="this.src='./assets/imgs/escudos/${logo}'">
               <h5>${club.short_name}</h5>
               <p>${club.city} - ${club.state}</p>
               <span class="badge ${badgeClass}">${club.status}</span>
@@ -185,16 +185,22 @@ function renderClubs(list, mode = "grid") {
           <div class="club-list">
             ${unknown
               .sort((a, b) => a.short_name.localeCompare(b.short_name))
-              .map(
-                (club) => `
-                <div class="club-item card-club"
-                     data-slug="${club.slug}">
-                  <strong>${club.short_name}</strong>
-                  <div class="club-city">
-                    ${club.city} (${club.state})
+              .map((club) => {
+                  const logo = club.slug || "placeholder.png";
+                  return`
+                  <div class="club-item card-club"
+                      data-slug="${club.slug}">
+                      <img
+                        src="${logo}"
+                        alt="Escudo ${club.short_name}"
+                        style="height:40px;width:40px;object-fit:contain"
+                        onerror="this.src='./assets/imgs/escudos/${logo}'">
+                    <strong>${club.short_name}</strong>
+                    <div class="club-city">
+                      ${club.city} (${club.state})
+                    </div>
                   </div>
-                </div>
-              `
+              `}
               )
               .join("")}
           </div>
