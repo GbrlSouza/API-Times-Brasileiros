@@ -16,11 +16,11 @@
   <div class="container d-flex align-items-center justify-content-between gap-4">
 
     <div class="d-flex align-items-center gap-3">
-      <img src="./assets/imgs/site/banner.png" style="height:50px;border-radius:8px">
+      <img id="banner" src="./assets/imgs/site/banner.png" alt="Banner Clubes de Futebol Brasileiros">
       <h5 class="text-light mb-0">Clubes de Futebol Brasileiros</h5>
     </div>
 
-    <div class="flex-grow-1" style="max-width:400px;">
+    <div id="searchContainer" class="flex-grow-1">
       <input type="text" id="searchInput" class="form-control search-input"
              placeholder="🔍 Buscar clube pelo nome">
     </div>
@@ -45,8 +45,7 @@
         <object
           id="brazilMap"
           type="image/svg+xml"
-          data="./assets/svg/brazil-states.svg"
-          style="max-width: 100%; height: 420px;">
+          data="./assets/svg/brazil-states.svg">
         </object>
       </div>
 
@@ -62,7 +61,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="modalTitle"></h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
         </div>
         <div class="modal-body" id="modalBody"></div>
         <div class="modal-footer">
