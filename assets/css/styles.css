@@ -115,3 +115,16 @@ footer {
 #mapContainer svg a {
   pointer-events: all;
 }
+
+.modal-body h6 {
+  font-weight: 600;
+  color: #495057;
+}
+
+.modal-body p {
+  margin-bottom: 0.3rem;
+}
+
+.modal-body audio {
+  width: 100%;
+}

@@ -231,49 +231,98 @@ function openModalBySlug(slug) {
 
   document.getElementById("modalTitle").innerText = club.full_name;
 
+  const logo = club.logo || "assets/img/placeholder.png";
+
   const anthem = club.anthem
     ? `
-      <p><strong>Hino:</strong> ${club.anthem.title}</p>
-      <p>
-        <a href="${club.anthem.lyrics_url}" target="_blank">📄 Ver letra</a>
-      </p>
-      ${
-        club.anthem.audio_url
-          ? `<audio controls src="${club.anthem.audio_url}"></audio>`
-          : ""
-      }
+      <div class="mt-3">
+        <h6>🎵 Hino</h6>
+        <p class="mb-1"><strong>${club.anthem.title}</strong></p>
+        <a href="${club.anthem.lyrics_url}" target="_blank" class="btn btn-sm btn-outline-primary">
+          📄 Ver letra
+        </a>
+        ${
+          club.anthem.audio_url
+            ? `<div class="mt-2"><audio controls src="${club.anthem.audio_url}"></audio></div>`
+            : ""
+        }
+      </div>
     `
     : `<p><strong>Hino:</strong> Não disponível</p>`;
 
   document.getElementById("modalBody").innerHTML = `
-    <p><strong>Cidade:</strong> ${club.city} - ${club.state}</p>
-    <p><strong>Fundação:</strong> ${club.founded ?? "Não informado"}</p>
-    <p><strong>Status:</strong> ${club.status}</p>
+    <div class="container-fluid">
+      <div class="row g-4">
 
-    <p>
-      <a href="https://pt.wikipedia.org/wiki/${club.wikipedia_page}"
-         target="_blank">🌐 Wikipedia</a>
-    </p>
+        <!-- COLUNA ESQUERDA -->
+        <div class="col-md-4 text-center">
+          <img src="${logo}"
+              alt="Escudo ${club.short_name}"
+              class="img-fluid mb-3"
+              style="max-height:120px"
+              onerror="this.src='./assets/imgs/escudos/${club.slug}'">
 
-    ${
-      club.site
-        ? `<p><a href="https://${club.site}" target="_blank">🌐 Site oficial</a></p>`
-        : ""
-    }
+          <span class="badge ${
+            club.status === "active" ? "bg-success" : "bg-danger"
+          } mb-3">
+            ${club.status}
+          </span>
 
-    ${
-      club.uniforme
-        ? `
-      <iframe
-        style="height:200px;width:400px;border:none"
-        src="./assets/imgs/uniformes/${club.uniforme}.html">
-      </iframe>
-      `
-        : ""
-    }
+          <div class="mt-3">
+            <a href="https://pt.wikipedia.org/wiki/${club.wikipedia_page}"
+              target="_blank"
+              class="btn btn-sm btn-outline-secondary w-100 mb-2">
+              🌐 Wikipedia
+            </a>
 
-    <hr>
-    ${anthem}
+            ${
+              club.site
+                ? `
+              <a href="https://${club.site}"
+                target="_blank"
+                class="btn btn-sm btn-outline-primary w-100 mb-2">
+                🌐 Site oficial
+              </a>
+            `
+                : ""
+            }
+          </div>
+
+          <!-- FUNDAÇÃO ABAIXO DOS LINKS -->
+          <div class="mt-3">
+            <p class="mb-1">🔰 <strong>Fundação</strong></p>
+            <p class="fs-5">${club.founded ?? "Não informado"}</p>
+          </div>
+        </div>
+
+        <!-- COLUNA DIREITA -->
+        <div class="col-md-8">
+
+          <div class="mb-3">
+            <p class="mb-1">📍 <strong>Cidade</strong></p>
+            <p>${club.city} - ${club.state}</p>
+          </div>
+
+          ${
+            club.uniforme
+              ? `
+            <h6 class="mb-3">👕 Uniformes</h6>
+            <div class="d-flex gap-4 flex-wrap justify-content-start mb-3">
+              <iframe
+                style="height:200px;width:100%;border:none"
+                src="./assets/imgs/uniformes/${club.uniforme}.html"
+                title="Uniformes do ${club.short_name}">
+              </iframe>
+            </div>
+          `
+              : ""
+          }
+
+          ${anthem}
+
+        </div>
+      </div>
+    </div>
   `;
 
   new bootstrap.Modal(document.getElementById("clubModal")).show();
