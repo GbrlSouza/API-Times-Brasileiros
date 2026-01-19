@@ -104,16 +104,16 @@ function renderClubs(list, mode = "grid") {
     container.className = "row g-3";
 
     list.forEach((club) => {
-      const logo = club.slug ? club.slug : "placeholder.png";
+      const logo = club.slug + club.typeSlug;
       const badgeClass =
         club.status === "active" ? "badge-active" : "badge-inactive";
 
       container.innerHTML += `
         <div class="col-sm-6 col-md-4 col-lg-3">
-          <div class="card card-club h-100" data-slug="${logo}">
+          <div class="card card-club h-100" data-slug="${club.slug}">
             <div class="card-body text-center">
               <img src="./assets/imgs/escudos/${logo}" style="max-height:80px"
-                   onerror="this.src='./assets/imgs/escudos/${logo}'">
+                   onerror="./assets/imgs/escudos/placeholder.png">
               <h5>${club.short_name}</h5>
               <p>${club.city} - ${club.state}</p>
               <span class="badge ${badgeClass}">${club.status}</span>
@@ -150,16 +150,16 @@ function renderClubs(list, mode = "grid") {
               ${known[year]
                 .sort((a, b) => a.short_name.localeCompare(b.short_name))
                 .map((club) => {
-                  const logo = club.slug || "placeholder.png";
+                  const logo = club.slug + club.typeSlug;
 
                   return `
                     <div class="club-item card-club d-flex align-items-center gap-3"
                         data-slug="${club.slug}">
                       <img
-                        src="${logo}"
+                        src="./assets/imgs/escudos/${logo}"
                         alt="Escudo ${club.short_name}"
                         style="height:40px;width:40px;object-fit:contain"
-                        onerror="this.src='./assets/imgs/escudos/${logo}'">
+                        onerror="./assets/imgs/escudos/placeholder.png">
 
                       <div>
                         <strong>${club.short_name}</strong>
@@ -186,15 +186,16 @@ function renderClubs(list, mode = "grid") {
             ${unknown
               .sort((a, b) => a.short_name.localeCompare(b.short_name))
               .map((club) => {
-                  const logo = club.slug || "placeholder.png";
+                  const logo = club.slug + club.typeSlug;
+
                   return`
                   <div class="club-item card-club"
                       data-slug="${club.slug}">
                       <img
-                        src="${logo}"
+                        src="./assets/imgs/escudos/${logo}"
                         alt="Escudo ${club.short_name}"
                         style="height:40px;width:40px;object-fit:contain"
-                        onerror="this.src='./assets/imgs/escudos/${logo}'">
+                        onerror="./assets/imgs/escudos/placeholder.png">
                     <strong>${club.short_name}</strong>
                     <div class="club-city">
                       ${club.city} (${club.state})
@@ -231,7 +232,7 @@ function openModalBySlug(slug) {
 
   document.getElementById("modalTitle").innerText = club.full_name;
 
-  const logo = club.logo || "assets/img/placeholder.png";
+  const logo = club.slug + club.typeSlug;
 
   const anthem = club.anthem
     ? `
@@ -256,12 +257,11 @@ function openModalBySlug(slug) {
 
         <!-- COLUNA ESQUERDA -->
         <div class="col-md-4 text-center">
-          <img src="${logo}"
+          <img src="./assets/imgs/escudos/${logo}"
               alt="Escudo ${club.short_name}"
               class="img-fluid mb-3"
               style="max-height:120px"
-              onerror="this.src='./assets/imgs/escudos/${club.slug}'">
-
+              onerror="./assets/imgs/escudos/placeholder.png">
           <span class="badge ${
             club.status === "active" ? "bg-success" : "bg-danger"
           } mb-3">
