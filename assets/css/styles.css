@@ -1,9 +1,75 @@
 body {
   background-color: #f5f7fa;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-footer {
-  font-size: 0.9rem;
+main {
+  flex: 1;
+}
+
+.main-footer {
+  background: #1f1f1f;
+  color: #aaa;
+  padding: 10px 0;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  margin-top: 40px;
+}
+
+.main-footer small {
+  font-size: 13px;
+}
+
+.main-header {
+  position: sticky;
+  top: 0;
+  z-index: 1050;
+  background: #1f1f1f;
+  padding: 14px 0;
+  margin-bottom: 32px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.search-input {
+  border-radius: 30px;
+  padding: 10px 16px;
+  border: 1px solid #ddd;
+  transition: all 0.2s ease;
+}
+
+.search-input:focus {
+  border-color: #0d6efd;
+  box-shadow: 0 0 0 2px rgba(13,110,253,0.25);
+}
+
+.sort-group .btn {
+  border-radius: 20px;
+  padding: 8px 14px;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.sort-group .btn:hover {
+  background: #0d6efd;
+  color: #fff;
+  border-color: #0d6efd;
+}
+
+@media (max-width: 768px) {
+  .main-header .container {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  body {
+    padding-top: 150px;
+  }
+
+  .sort-group {
+    width: 100%;
+    justify-content: center;
+  }
 }
 
 .card-club {
@@ -96,8 +162,6 @@ footer {
 #brazilMap a {
   pointer-events: all;
 }
-
-/* EXTENSÃO PARA O SVG DO MAPA */
 
 #mapContainer svg path {
   cursor: pointer;
