@@ -1,0 +1,38 @@
+body.club-page {
+  background: radial-gradient(circle at top, #0f2027, #000);
+  color: #fff;
+  font-family: 'Inter', system-ui;
+}
+
+.club-hero {
+  padding: 4rem 1rem;
+  background: linear-gradient(135deg, #00c6ff33, #0072ff33);
+  background: blur(12px);
+}
+
+.club-logo {
+  max-height: 140px;
+  margin-bottom: 1rem;
+  filter: drop-shadow(0 0 20px rgba(0,198,255,.5));
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px,1fr));
+  gap: 1.5rem;
+}
+
+.info-card {
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 16px;
+  padding: 1.5rem;
+  text-align: center;
+  box-shadow: 0 0 30px rgba(0,0,0,.4);
+}
+
+.info-card h6 {
+  color: #00c6ff;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}

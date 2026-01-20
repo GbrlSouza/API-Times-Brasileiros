@@ -231,7 +231,8 @@ function renderClubs(list, mode = "grid") {
 
   document.querySelectorAll(".card-club").forEach((card) => {
     card.addEventListener("click", () => {
-      openModalBySlug(card.dataset.slug);
+      // openModalBySlug(card.dataset.slug);
+      window.location.href = `clube.html?slug=${card.dataset.slug}`;
     });
   });
 }
