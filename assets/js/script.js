@@ -63,14 +63,13 @@ function selectState(uf, stateName) {
 ========================= */
 function renderMapView() {
   document.getElementById("mapContainer")?.classList.remove("d-none");
-  document.getElementById("clubsContainer").classList.add("d-none");
+  document.getElementById("clubsContainer")?.classList.add("d-none");
 
   const svgObject = document.getElementById("brazilMap");
-  if (mapBound) return;
 
-  svgObject.addEventListener("load", () => {
+  const bindMap = () => {
     const svg = svgObject.contentDocument;
-    if (!svg) return;
+    if (!svg || mapBound) return;
 
     svg.querySelectorAll("path").forEach((state) => {
       state.addEventListener("click", (e) => {
@@ -86,7 +85,13 @@ function renderMapView() {
     });
 
     mapBound = true;
-  });
+  };
+
+  if (svgObject.contentDocument) {
+    bindMap();
+  } else {
+    svgObject.addEventListener("load", bindMap, { once: true });
+  }
 }
 
 /* =========================
@@ -186,9 +191,9 @@ function renderClubs(list, mode = "grid") {
             ${unknown
               .sort((a, b) => a.short_name.localeCompare(b.short_name))
               .map((club) => {
-                  const logo = club.slug + club.typeSlug;
+                const logo = club.slug + club.typeSlug;
 
-                  return`
+                return `
                   <div class="club-item card-club"
                       data-slug="${club.slug}">
                       <img
@@ -201,8 +206,8 @@ function renderClubs(list, mode = "grid") {
                       ${club.city} (${club.state})
                     </div>
                   </div>
-              `}
-              )
+              `;
+              })
               .join("")}
           </div>
         </div>
@@ -334,7 +339,7 @@ function openModalBySlug(slug) {
 document.getElementById("searchInput")?.addEventListener("input", (e) => {
   const value = e.target.value.toLowerCase();
   filteredClubs = clubs.filter((c) =>
-    c.short_name.toLowerCase().includes(value)
+    c.short_name.toLowerCase().includes(value),
   );
   renderClubs(filteredClubs);
 });
@@ -360,7 +365,7 @@ document.querySelectorAll("[data-sort]").forEach((btn) => {
     }
 
     filteredClubs.sort((a, b) =>
-      a[type]?.toString().localeCompare(b[type]?.toString())
+      a[type]?.toString().localeCompare(b[type]?.toString()),
     );
 
     renderClubs(filteredClubs);
