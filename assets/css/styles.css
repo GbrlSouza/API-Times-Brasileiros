@@ -160,6 +160,31 @@ object#brazilMap {
   color: #57606a;
 }
 
+#mapContainer {
+  overflow-x: hidden;
+}
+
+#brazilMap {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+}
+
+#brazilMap svg {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+}
+
+#brazilMap .active path,
+#brazilMap path.active {
+  fill: #198754 !important;
+}
+
+#brazilMap path {
+  cursor: pointer;
+}
+
 #brazilMap path {
   cursor: pointer;
   transition: fill 0.2s ease;
@@ -192,6 +217,11 @@ object#brazilMap {
 
 #mapContainer svg a {
   pointer-events: all;
+}
+
+path {
+  pointer-events: all;
+  cursor: pointer;
 }
 
 .modal-body h6 {

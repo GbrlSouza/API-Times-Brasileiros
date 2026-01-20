@@ -71,16 +71,30 @@ function renderMapView() {
     const svg = svgObject.contentDocument;
     if (!svg || mapBound) return;
 
-    svg.querySelectorAll("path").forEach((state) => {
-      state.addEventListener("click", (e) => {
+    svg.querySelectorAll("a, path").forEach((el) => {
+      el.addEventListener("click", (e) => {
         e.preventDefault();
 
-        svg
-          .querySelectorAll("path.active")
-          .forEach((p) => p.classList.remove("active"));
+        const link = el.closest("a");
+        const title =
+          link?.querySelector("title")?.textContent ||
+          el.querySelector("title")?.textContent;
 
-        state.classList.add("active");
-        selectState(state.id, state.getAttribute("name"));
+        if (!title) return;
+
+        const uf = title
+          .normalize("NFD")
+          .replace(/[\u0300-\u036f]/g, "")
+          .slice(0, 2)
+          .toUpperCase();
+
+        svg
+          .querySelectorAll(".active")
+          .forEach((n) => n.classList.remove("active"));
+
+        (link || el).classList.add("active");
+
+        selectState(uf, title);
       });
     });
 
